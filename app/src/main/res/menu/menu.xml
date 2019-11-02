@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_change_lang"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_change_en"
+                android:icon="@drawable/icons8_great_britain_48"
+                android:title="@string/change_language_english"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/action_change_in"
+                android:icon="@drawable/icons8_indonesia_48"
+                android:title="@string/change_language_indonesia"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+</menu>

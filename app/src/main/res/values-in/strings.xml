@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movie Catalog</string>
+    <string name="title_movie">Film</string>
+    <string name="title_tv">Serial TV</string>
+    <string name="release_date">Tanggal Rilis</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title">Judul</string>
+    <string name="overview">Sinopsis</string>
+    <string name="change_language_english">Inggris</string>
+    <string name="change_language_indonesia">Bahasa Indonesia</string>
+    <string name="poster_film">Poster Film</string>
+    <string name="favorite">Favorit</string>
+    <string name="no_data">Tidak Ada Data</string>
+</resources>
