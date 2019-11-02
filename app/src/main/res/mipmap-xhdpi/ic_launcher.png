@@ -1,0 +1,113 @@
+package id.ac.its.papsi.papsisipus;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import id.ac.its.papsi.papsisipus.R;
+import id.ac.its.papsi.papsisipus.utils.SharedPrefManager;
+
+public class DetailPinjamActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+
+  private String idPinjam, username;
+  private RequestQueue requestQueue;
+  private SharedPrefManager sharedPrefManager;
+  private ImageView ivCoverBuku;
+  private Button btnBatal;
+  private TextView tvKode, tvJudul, tvPenyusun, tvTahun, tvStatus, tvTglPinjam, tvTglKembali;
+  private SwipeRefreshLayout swipeRefreshLayout;
+
+  private void getData() {
+
+    String url = "https://papsi.its.ac.id/sipus/pages/webservice/ambil_detail_pinjam.php?id=" + idPinjam;
+    StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+      @Override
+      public void onResponse(String response) {
+        try {
+          JSONObject jsonObject = new JSONObject(response);
+          JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
+          JSONObject jsonResponse = jsonArray.getJSONObject(0);
+          String id = jsonResponse.getString("id");
+          String kode = jsonResponse.getString("kode_buku");
+          String judul = jsonResponse.getString("judul_buku");
+          String penyusun = jsonResponse.getString("penyusun");
+          String tahun = jsonResponse.getString("tahun");
+          String status = jsonResponse.getString("status");
+          String cover = jsonResponse.getString("cover");
+          String tglPinjam = jsonResponse.getString("tgl_pinjam");
+          String tglKembali = "-";
+
+          if (status.equals("Proses")) {
+            btnBatal.setEnabled(true);
+            btnBatal.setVisibility(View.VISIBLE);
+            tvStatus.setTextColor(getResources().getColor(R.color.colorStatusProses));
+          } else if (status.equals("Dikembalikan")){
+            tglKembali = jsonResponse.getString("tgl_kembali");
+            btnBatal.setVisibility(View.GONE);
+            tvStatus.setTextColor(getResources().getColor(R.color.colorStatusValid));
+          } else {
+            btnBatal.setVisibility(View.GONE);
+            tvStatus.setTextColor(getResources().getColor(R.color.colorStatus));
+          }
+          setTitle(judul);
+          tvKode.setText(kode);
+          tvJudul.setText(judul);
+          tvPenyusun.setText(penyusun);
+          tvTahun.setText(tahun);
+          tvStatus.setText(status);
+          tvTglPinjam.setText(tglPinjam);
+          tvTglKembali.setText(tglKembali);
+
+
+          if (!cover.trim().isEmpty()) {
+            Picasso.get().load("https://papsi.its.ac.id/sipus/img/cover/" + cover).into(ivCoverBuku);
+          } else {
+            Picasso.get().load(R.drawable.no_image).into(ivCoverBuku);
+          }
+        } catch (JSONException e) {
+          Toast.makeText(DetailPinjamActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
+      }
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        Toast.makeText(DetailPinjamActivity.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+      }
+    });
+    requestQueue.add(request);
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_detail_pinjam);
+
+    sharedPrefManager = new SharedPrefManager(this);
+    username = sharedPrefManager.getSpNim();
+
+    requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+    swipeRefreshLayout = findViewById(R.id.re

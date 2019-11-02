@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Movie Catalog</string>
+    <string name="title_movie">Movies</string>
+    <string name="title_tv">Tv Shows</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title">Title</string>
+    <string name="overview">Overview</string>
+    <string name="change_language_english">English</string>
+    <string name="change_language_indonesia">Indonesian</string>
+    <string name="release_date">Release Date</string>
+
+</resources>
