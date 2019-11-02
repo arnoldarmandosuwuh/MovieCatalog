@@ -1,0 +1,81 @@
+package id.ac.its.papsi.papsisipus.adapter;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
+import id.ac.its.papsi.papsisipus.DetailActivity;
+import id.ac.its.papsi.papsisipus.DetailPinjamActivity;
+import id.ac.its.papsi.papsisipus.R;
+import id.ac.its.papsi.papsisipus.model.Buku;
+import id.ac.its.papsi.papsisipus.utils.CircleTransform;
+
+public class AdapterPinjam extends RecyclerView.Adapter<AdapterPinjam.BukuViewHolder> {
+    private ArrayList<Buku> listBuku;
+    private Context context;
+
+    public AdapterPinjam (Context context, ArrayList<Buku> listBuku){
+        this.context = context;
+        this.listBuku = listBuku;
+    }
+
+    @NonNull
+    @Override
+    public AdapterPinjam.BukuViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.list_buku, viewGroup, false);
+
+        return new BukuViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AdapterPinjam.BukuViewHolder bukuViewHolder, int i) {
+        Buku buku = listBuku.get(i);
+
+        bukuViewHolder.tvJudul.setText(buku.getJudul_buku());
+        // bukuViewHolder.tvJudul.setBreakStrategy(BREAK_STRATEGY_SIMPLE);
+        bukuViewHolder.tvTahun.setText(buku.getTahun());
+
+        if (!buku.getCover().trim().isEmpty()){
+            Picasso.get().load("https://papsi.its.ac.id/sipus/img/cover/"+buku.getCover()).transform(new CircleTransform()).into(bukuViewHolder.ivCover);
+        }
+        else {
+            Picasso.get().load(R.drawable.no_image).transform(new CircleTransform()).into(bukuViewHolder.ivCover);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return listBuku == null ? 0 : listBuku.size();
+    }
+
+    class BukuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        ImageView ivCover;
+        TextView tvJudul, tvTahun;
+
+        public BukuViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            ivCover = itemView.findViewById(R.id.ivCover);
+            tvJudul = itemView.findViewById(R.id.tvJudul);
+            tvTahun = itemView.findViewById(R.id.tvTahun);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Buku buku = listBuku.get(getAdapterPosition());
+
+            Intent intentDetail = new Intent(context, DetailPinjamActivity.class);
+            intentDetail.putExtra("idPinjam", buku.getId

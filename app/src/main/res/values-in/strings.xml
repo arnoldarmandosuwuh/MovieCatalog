@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movie Catalog</string>
+    <string name="title_movie">Film</string>
+    <string name="title_tv">Acara TV</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Judul</string>
+    <string name="overview">Sinopsis</string>
+    <string name="change_language_english">Inggris</string>
+    <string name="change_language_indonesia">Bahasa Indonesia</string>
+</resources>
