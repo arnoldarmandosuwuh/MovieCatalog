@@ -3,10 +3,9 @@ package com.aas.moviecatalog.tvshow
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -51,6 +50,8 @@ class TvShowFragment : Fragment(), TvShowInterface {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
+
         viewModel = ViewModelProviders.of(this).get(TvShowViewModel::class.java)
         viewModel.getMovie().observe(this, getTvShow)
 
@@ -88,5 +89,24 @@ class TvShowFragment : Fragment(), TvShowInterface {
         if (it != null) {
             mAdapter.setTv(it.results)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        val menuItem = menu.findItem(R.id.action_search)
+        if(menuItem != null){
+            val searchView: SearchView = menuItem.actionView as SearchView
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    mPresenter.searchTvShow(query)
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
+
+            })
+        }
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
