@@ -21,6 +21,8 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
     private var id: String = "0"
     private var posterPath: String = "poster_path"
     private var title: String = "title"
+    private var overview: String = "overview"
+    private var releaseDate: String = "release_date"
     private var menuItem: Menu? = null
     private var isFav: Boolean = false
 
@@ -60,11 +62,14 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
     override fun showMovie(movie: DetailMovieModel) {
         title = movie.title
         posterPath = movie.poster_path
+        overview = movie.overview
+        releaseDate = movie.release_date
+
         supportActionBar?.title = title
 
         tvJudulFilm.text = title
-        tvDate.text = movie.release_date
-        tvOverview.text = movie.overview
+        tvDate.text = releaseDate
+        tvOverview.text = overview
 
         Picasso
             .get()
@@ -75,15 +80,18 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
     override fun showTvShow(tv: DetailTvShowModel) {
         title = tv.name
         posterPath = tv.poster_path
+        overview = tv.overview
+        releaseDate = tv.first_air_date
+
         supportActionBar?.title = title
 
-        tvJudulFilm.text = tv.name
-        tvDate.text = tv.first_air_date
-        tvOverview.text = tv.overview
+        tvJudulFilm.text = title
+        tvDate.text = releaseDate
+        tvOverview.text = overview
 
         Picasso
             .get()
-            .load(ApiRepository.BASE_IMAGE_URL + tv.poster_path)
+            .load(ApiRepository.BASE_IMAGE_URL + posterPath)
             .into(ivPosterFilm)
     }
 
@@ -108,8 +116,8 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
                     setFavorite()
                 }
                 else {
-                    if (id != "0" && title != "title" && type != "type" && posterPath != "poster_path") {
-                        mPresenter.addFavorite(this, id, type, title, posterPath)
+                    if (id != "0" && title != "title" && type != "type" && posterPath != "poster_path" && overview != "overview" && releaseDate != "release_date") {
+                        mPresenter.addFavorite(this, id, type, title, posterPath, overview, releaseDate)
                         isFav = !isFav
                         setFavorite()
                     } else {

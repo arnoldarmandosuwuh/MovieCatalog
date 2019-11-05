@@ -8,8 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import com.aas.moviecatalog.favorite.FavoriteFragment
 import com.aas.moviecatalog.movie.MovieFragment
+import com.aas.moviecatalog.setting.SettingsActivity
 import com.aas.moviecatalog.tvshow.TvShowFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -85,6 +87,9 @@ class MainActivity : AppCompatActivity() {
             R.id.action_change_in -> {
                 restartInLocale(Locale.forLanguageTag("in-ID"))
             }
+            R.id.notification_menu -> {
+                startActivity<SettingsActivity>()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -98,5 +103,10 @@ class MainActivity : AppCompatActivity() {
         resources.updateConfiguration(config, resources.displayMetrics)
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+        super.onBackPressed()
     }
 }

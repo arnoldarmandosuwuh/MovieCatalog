@@ -53,6 +53,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
+    implementation 'androidx.preference:preference:1.1.0'
+//    implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
+
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation "com.squareup.retrofit2:converter-gson:2.6.2"
@@ -66,3 +69,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 //apply plugin: 'com.google.gms.google-services'
+

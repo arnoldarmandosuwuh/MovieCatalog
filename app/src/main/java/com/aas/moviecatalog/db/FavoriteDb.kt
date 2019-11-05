@@ -5,7 +5,9 @@ data class FavoriteDb(
     val filmId: String,
     val filmType: String,
     val filmTitle: String,
-    val posterPath: String
+    val posterPath: String,
+    val overview: String,
+    val releaseDate: String
 ) {
     companion object {
         const val TABLE_FAVORITE: String = "TABLE_FAVORITE"
@@ -14,5 +16,7 @@ data class FavoriteDb(
         const val FILM_TYPE: String = "FILM_TYPE"
         const val FILM_TITLE: String = "FILM_TITLE"
         const val POSTER_PATH: String = "POSTER"
+        const val OVERVIEW: String = "OVERVIEW"
+        const val RELEASE_DATE: String = "RELEASE_DATE"
     }
 }

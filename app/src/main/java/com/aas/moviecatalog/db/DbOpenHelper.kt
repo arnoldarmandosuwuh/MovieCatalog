@@ -38,7 +38,9 @@ class DbOpenHelper(context: Context, dbName: String = "dbFavorite.db") :
                 FavoriteDb.FILM_ID to TEXT,
                 FavoriteDb.FILM_TYPE to TEXT,
                 FavoriteDb.FILM_TITLE to TEXT,
-                FavoriteDb.POSTER_PATH to TEXT
+                FavoriteDb.POSTER_PATH to TEXT,
+                FavoriteDb.OVERVIEW to TEXT,
+                FavoriteDb.RELEASE_DATE to TEXT
             )
         }
     }

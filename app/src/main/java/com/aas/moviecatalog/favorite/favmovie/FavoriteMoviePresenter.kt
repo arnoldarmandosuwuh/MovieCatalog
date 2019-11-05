@@ -25,7 +25,9 @@ class FavoriteMoviePresenter(private val mInterface: FavoriteMovieInterface) {
                 listMovie.add(Movie(
                     favorite[i].filmId,
                     favorite[i].filmTitle,
-                    favorite[i].posterPath
+                    favorite[i].posterPath,
+                    favorite[i].overview,
+                    favorite[i].releaseDate
                 ))
             }
         }

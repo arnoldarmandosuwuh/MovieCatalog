@@ -1,13 +1,18 @@
 package com.aas.moviecatalog.detail
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
+import android.os.Build
 import android.util.Log
 import com.aas.moviecatalog.api.ApiRepository
 import com.aas.moviecatalog.api.MovieDBApi
 import com.aas.moviecatalog.db.FavoriteDb
 import com.loopj.android.http.AsyncHttpClient.LOG_TAG
 import com.aas.moviecatalog.db.database
+import com.aas.moviecatalog.widget.WidgetService
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
@@ -72,40 +77,46 @@ class DetailPresenter(
     }
 
     fun addFavorite(
-        context: Context?,
+        context: Context,
         filmId: String,
         filmType: String,
         filmTitle: String,
-        posterPath: String
+        posterPath: String,
+        overview: String,
+        releaseDate: String
     ) {
         try {
-            context?.database?.use {
+            context.database.use {
                 insert(
                     FavoriteDb.TABLE_FAVORITE,
                     FavoriteDb.FILM_ID to filmId,
                     FavoriteDb.FILM_TYPE to filmType,
                     FavoriteDb.FILM_TITLE to filmTitle,
-                    FavoriteDb.POSTER_PATH to posterPath
+                    FavoriteDb.POSTER_PATH to posterPath,
+                    FavoriteDb.OVERVIEW to overview,
+                    FavoriteDb.RELEASE_DATE to releaseDate
                 )
             }
-            context?.toast("Favorite")?.show()
+            context.toast("Favorite").show()
+            updateWidget(context)
         } catch (e: SQLiteConstraintException) {
-            context?.toast(e.localizedMessage)?.show()
+            context.toast(e.localizedMessage).show()
         }
     }
 
-    fun removeFavorite(context: Context?, filmId: String) {
+    fun removeFavorite(context: Context, filmId: String) {
         try {
-            context?.database?.use {
+            context.database.use {
                 delete(
                     FavoriteDb.TABLE_FAVORITE,
                     "(FILM_ID = {id})",
                     "id" to filmId
                 )
             }
-            context?.toast("Unfavorite")?.show()
+            context.toast("Unfavorite").show()
+            updateWidget(context)
         } catch (e: SQLiteConstraintException) {
-            context?.toast(e.localizedMessage)?.show()
+            context.toast(e.localizedMessage).show()
         }
     }
 
@@ -124,5 +135,21 @@ class DetailPresenter(
             }
         }
         return isFav
+    }
+
+    private fun updateWidget(context: Context){
+        val jobId = (0 until 200).random()
+        val milis: Long = 10000
+        val serviceComponent = ComponentName(context, WidgetService::class.java)
+        val builder = JobInfo.Builder(jobId, serviceComponent)
+        builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_NONE)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            builder.setMinimumLatency(milis)
+        }
+        else{
+            builder.setPeriodic(milis)
+        }
+        val jobScheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+        jobScheduler.schedule(builder.build())
     }
 }

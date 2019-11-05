@@ -16,4 +16,22 @@
 
     <string name="appwidget_text">Favorit</string>
     <string name="empty_text">Tidak Ada Data</string>
+
+    <string name="title_activity_settings">Pengaturan</string>
+    <string name="setting">Pengaturan</string>
+
+    <string name="reminder">Pengingat</string>
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="release_today_reminder">Pengingat Rilis Hari Ini</string>
+
+    <string name="daily_key">DAILY_KEY</string>
+    <string name="release_today_key">RELEASE_TODAY_KEY</string>
+
+    <string name="no_daily_reminder">Tidak ada pengingat harian</string>
+    <string name="yes_daily_reminder">Pengingat harian setiap pukul 7 pagi</string>
+
+    <string name="no_release_movie_reminder">Tidak ada pengingat rilis hari ini</string>
+    <string name="release_movie_reminder">Pengingat rilis hari ini setiap pukul 8 pagi</string>
+
+
 </resources>
