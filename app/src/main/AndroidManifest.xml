@@ -4,6 +4,8 @@
     package="com.aas.moviecatalog">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="com.aas.moviecatalog.READ_DATABASE" android:protectionLevel="normal"/>
+    <permission android:name="com.aas.moviecatalog.WRITE_DATABASE" android:protectionLevel="normal"/>
 
     <application
         android:allowBackup="true"
@@ -50,6 +52,14 @@
             android:name=".setting.ReminderReceiver"
             android:enabled="true"
             android:exported="true" />
+
+        <provider
+            android:authorities="com.aas.moviecatalog"
+            android:name=".provider.FavoriteProvider"
+            android:exported="true"
+            android:readPermission="com.aas.moviecatalog.READ_DATABASE"
+            android:writePermission="com.aas.moviecatalog.WRITE_DATABASE" />
+
     </application>
 
 </manifest>

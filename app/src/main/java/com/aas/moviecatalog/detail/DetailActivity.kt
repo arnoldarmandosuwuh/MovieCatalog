@@ -113,12 +113,14 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
                 if (isFav){
                     mPresenter.removeFavorite(this, id)
                     isFav = !isFav
+                    toast(resources.getString(R.string.remove_favorite)).show()
                     setFavorite()
                 }
                 else {
                     if (id != "0" && title != "title" && type != "type" && posterPath != "poster_path" && overview != "overview" && releaseDate != "release_date") {
                         mPresenter.addFavorite(this, id, type, title, posterPath, overview, releaseDate)
                         isFav = !isFav
+                        toast(resources.getString(R.string.add_favorite)).show()
                         setFavorite()
                     } else {
                         toast("Not Available")

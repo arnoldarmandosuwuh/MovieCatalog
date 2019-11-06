@@ -15,7 +15,9 @@
     <string name="no_data">Tidak Ada Data</string>
 
     <string name="appwidget_text">Favorit</string>
-    <string name="empty_text">Tidak Ada Data</string>
+
+    <string name="add_favorite">Ditambahkan ke favorit</string>
+    <string name="remove_favorite">Dihapus dari favorit</string>
 
     <string name="title_activity_settings">Pengaturan</string>
     <string name="setting">Pengaturan</string>
@@ -33,5 +35,19 @@
     <string name="no_release_movie_reminder">Tidak ada pengingat rilis hari ini</string>
     <string name="release_movie_reminder">Pengingat rilis hari ini setiap pukul 8 pagi</string>
 
+    <string name="daily_notification_channel_id">notification_daily_channel</string>
+    <string name="daily_notification_channel_name">Daily Reminder</string>
+    <string name="release_today_notification_channel_id">notification_release_channel</string>
+    <string name="release_today_notification_channel_name">Release Today Reminder</string>
+
+    <string name="daily_subscribed">Pengingat Harian : Hidup</string>
+    <string name="daily_unsubcsribed">Pengingat Harian : Mati</string>
+    <string name="release_today_subscribed">Pengingat Rilis Hari Ini : Hidup</string>
+    <string name="release_today_unsubscribed">Pengingat Rilis Hari Ini : Mati</string>
+
+    <string name="nowplaying">Sedang Tayang : </string>
+
+    <string name="daily_notif_title">Selamat Pagi!</string>
+    <string name="daily_notif_content">Cek film menarik hari ini!</string>
 
 </resources>

@@ -97,7 +97,6 @@ class DetailPresenter(
                     FavoriteDb.RELEASE_DATE to releaseDate
                 )
             }
-            context.toast("Favorite").show()
             updateWidget(context)
         } catch (e: SQLiteConstraintException) {
             context.toast(e.localizedMessage).show()
@@ -113,7 +112,6 @@ class DetailPresenter(
                     "id" to filmId
                 )
             }
-            context.toast("Unfavorite").show()
             updateWidget(context)
         } catch (e: SQLiteConstraintException) {
             context.toast(e.localizedMessage).show()

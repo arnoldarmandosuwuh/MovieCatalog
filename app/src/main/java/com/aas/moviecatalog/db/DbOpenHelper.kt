@@ -1,8 +1,10 @@
 package com.aas.moviecatalog.db
 
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
+import com.aas.moviecatalog.MainActivity
 import org.jetbrains.anko.db.*
 
 class DbOpenHelper(context: Context, dbName: String = "dbFavorite.db") :
@@ -27,6 +29,22 @@ class DbOpenHelper(context: Context, dbName: String = "dbFavorite.db") :
 
     fun open(){
         database = instance!!.writableDatabase
+    }
+
+    fun queryMovieProvider(): Cursor {
+        return database.query(
+            FavoriteDb.TABLE_FAVORITE,
+            null, "${FavoriteDb.FILM_TYPE} = ?", arrayOf(MainActivity.MOVIE),
+            null, null, null
+        )
+    }
+
+    fun queryTvShowProvider(): Cursor {
+        return database.query(
+            FavoriteDb.TABLE_FAVORITE,
+            null, "${FavoriteDb.FILM_TYPE} = ?", arrayOf(MainActivity.TV),
+            null, null, null
+        )
     }
 
 

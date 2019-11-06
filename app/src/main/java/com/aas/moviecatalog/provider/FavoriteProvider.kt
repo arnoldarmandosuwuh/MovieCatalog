@@ -6,19 +6,23 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
 import com.aas.moviecatalog.db.DbOpenHelper
+import com.aas.moviecatalog.db.DbOpenHelper.Companion.AUTHORITY
+import com.aas.moviecatalog.db.FavoriteDb.Companion.TABLE_FAVORITE
+import com.aas.moviecatalog.db.database
 
-class FavoriteProvider : ContentProvider(){
+class FavoriteProvider : ContentProvider() {
 
     private lateinit var dbOpenHelper: DbOpenHelper
     private val movieId = 1
     private val tvShowId = 2
 
-//    private val mUriMatcher = UriMatcher(UriMatcher.NO_MATCH).apply {
-//        this.addURI(AUTHO)
-//    }
+    private val mUriMatcher = UriMatcher(UriMatcher.NO_MATCH).apply {
+        this.addURI(AUTHORITY, TABLE_FAVORITE, movieId)
+        this.addURI(AUTHORITY, TABLE_FAVORITE, tvShowId)
+    }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return null
     }
 
     override fun query(
@@ -28,11 +32,17 @@ class FavoriteProvider : ContentProvider(){
         selectionArgs: Array<out String>?,
         sortOrder: String?
     ): Cursor? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        dbOpenHelper.open()
+        return when (mUriMatcher.match(uri)) {
+            movieId -> dbOpenHelper.queryMovieProvider()
+            tvShowId -> dbOpenHelper.queryTvShowProvider()
+            else -> dbOpenHelper.queryMovieProvider()
+        }
     }
 
     override fun onCreate(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        dbOpenHelper = context?.database!!
+        return true
     }
 
     override fun update(
@@ -41,15 +51,15 @@ class FavoriteProvider : ContentProvider(){
         selection: String?,
         selectionArgs: Array<out String>?
     ): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+return 0
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return 0
     }
 
     override fun getType(uri: Uri): String? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return null
     }
 
 }
