@@ -7,6 +7,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Build
 import android.util.Log
+import com.aas.moviecatalog.R
 import com.aas.moviecatalog.api.ApiRepository
 import com.aas.moviecatalog.api.MovieDBApi
 import com.aas.moviecatalog.db.FavoriteDb
@@ -97,6 +98,7 @@ class DetailPresenter(
                     FavoriteDb.RELEASE_DATE to releaseDate
                 )
             }
+            context.toast(context.resources.getString(R.string.add_favorite)).show()
             updateWidget(context)
         } catch (e: SQLiteConstraintException) {
             context.toast(e.localizedMessage).show()
@@ -112,6 +114,7 @@ class DetailPresenter(
                     "id" to filmId
                 )
             }
+            context.toast(context.resources.getString(R.string.remove_favorite)).show()
             updateWidget(context)
         } catch (e: SQLiteConstraintException) {
             context.toast(e.localizedMessage).show()
@@ -128,23 +131,22 @@ class DetailPresenter(
                     "id" to filmId
                 )
             val fav = result.parseList(classParser<FavoriteDb>())
-            if (fav.isNotEmpty()){
+            if (fav.isNotEmpty()) {
                 isFav = true
             }
         }
         return isFav
     }
 
-    private fun updateWidget(context: Context){
+    private fun updateWidget(context: Context) {
         val jobId = (0 until 200).random()
         val milis: Long = 10000
         val serviceComponent = ComponentName(context, WidgetService::class.java)
         val builder = JobInfo.Builder(jobId, serviceComponent)
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_NONE)
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             builder.setMinimumLatency(milis)
-        }
-        else{
+        } else {
             builder.setPeriodic(milis)
         }
         val jobScheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler

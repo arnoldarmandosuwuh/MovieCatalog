@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Favorite App</string>
+    <string name="title_movie">Movies</string>
+    <string name="title_tv">Tv Shows</string>
+
+    <string name="title">Title</string>
+    <string name="poster_film">Poster Film</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

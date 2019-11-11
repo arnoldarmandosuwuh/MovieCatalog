@@ -7,9 +7,11 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aas.moviecatalog.MainActivity
 import com.aas.moviecatalog.R
 import com.aas.moviecatalog.api.ApiRepository
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.toast
@@ -17,6 +19,7 @@ import org.jetbrains.anko.toast
 class DetailActivity : AppCompatActivity(), DetailInterface {
 
     private lateinit var mPresenter: DetailPresenter
+    private lateinit var view: View
     private var type: String = "type"
     private var id: String = "0"
     private var posterPath: String = "poster_path"
@@ -110,18 +113,23 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
                 true
             }
             R.id.fav -> {
-                if (isFav){
+                if (isFav) {
                     mPresenter.removeFavorite(this, id)
                     isFav = !isFav
-                    toast(resources.getString(R.string.remove_favorite)).show()
                     setFavorite()
-                }
-                else {
+                } else {
                     if (id != "0" && title != "title" && type != "type" && posterPath != "poster_path" && overview != "overview" && releaseDate != "release_date") {
-                        mPresenter.addFavorite(this, id, type, title, posterPath, overview, releaseDate)
+                        mPresenter.addFavorite(
+                            this,
+                            id,
+                            type,
+                            title,
+                            posterPath,
+                            overview,
+                            releaseDate
+                        )
                         isFav = !isFav
-                        toast(resources.getString(R.string.add_favorite)).show()
-                        setFavorite()
+                         setFavorite()
                     } else {
                         toast("Not Available")
                     }
