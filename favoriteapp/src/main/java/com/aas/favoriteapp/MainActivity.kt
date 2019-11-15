@@ -1,62 +1,110 @@
 package com.aas.favoriteapp
 
+import android.content.Context
+import android.database.ContentObserver
+import android.database.Cursor
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.aas.favoriteapp.movie.MovieFragment
+import android.os.Handler
+import android.os.HandlerThread
+import android.view.View
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.aas.favoriteapp.db.DbOpenHelper
+import com.aas.favoriteapp.db.FavoriteDb
+import com.aas.favoriteapp.model.Movie
+import com.aas.favoriteapp.adapter.MovieAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.ref.WeakReference
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LoadMoviesCallback {
 
     companion object {
-        const val DATA_EXTRA = "data"
         const val MOVIE = "movie"
         const val TV = "tv"
-        const val TYPE = "type"
-        const val INSTANCE = "instance"
     }
+
+    private var movies = mutableListOf<Movie>()
+    private lateinit var mAdapter: MovieAdapter
+    private lateinit var dataObserver: DataObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        nav_view.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_movie -> {
-                    val fragment = MovieFragment()
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.flContent, fragment, MovieFragment::class.java.simpleName)
-                        .commit()
+        rvMovie.addItemDecoration(
+            DividerItemDecoration(
+                rvMovie.context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        rvMovie.layoutManager = LinearLayoutManager(this)
+        mAdapter = MovieAdapter(this, movies)
+        rvMovie.adapter = mAdapter
 
-                    supportActionBar?.setTitle(R.string.title_movie)
-                }
-                R.id.nav_tv -> {
-//                    val fragment = TvShowFragment()
-//                    supportFragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.flContent, fragment, TvShowFragment::class.java.simpleName)
-//                        .commit()
+        val handlerThread = HandlerThread("DataObserver")
+        handlerThread.start()
+        val handler = Handler(handlerThread.looper)
+        dataObserver = DataObserver(handler, this)
+        contentResolver.registerContentObserver(DbOpenHelper.CONTENT_URI, true, dataObserver)
+        GetData(this, this).execute()
+    }
 
-                    supportActionBar?.setTitle(R.string.title_tv)
-                }
-            }
-            true
-        }
-        if (savedInstanceState == null) {
-            nav_view.selectedItemId = R.id.nav_movie
+    override fun postExecute(cursor: Cursor) {
+        val cursorData = mapCursorToArrayList(cursor)
+        if (cursorData.isNotEmpty()) {
+            movies.addAll(cursorData)
+            mAdapter.notifyDataSetChanged()
         } else {
-            when (savedInstanceState.getString(INSTANCE)) {
-                MovieFragment::class.java.simpleName -> {
-                    nav_view.selectedItemId = R.id.nav_movie
-                }
-//                TvShowFragment::class.java.simpleName -> {
-//                    nav_view.selectedItemId = R.id.nav_tv
-//                }
+            tvNoData.visibility = View.VISIBLE
+        }
+    }
+
+    internal class DataObserver(handler: Handler, private val context: Context) :
+        ContentObserver(handler) {
+        override fun onChange(selfChange: Boolean) {
+            super.onChange(selfChange)
+            GetData(context, context as MainActivity).execute()
+        }
+    }
+
+    internal class GetData(context: Context, callback: LoadMoviesCallback) :
+        AsyncTask<Void, Void, Cursor>() {
+        private val weakContent = WeakReference(context)
+        private val weakCallback = WeakReference(callback)
+
+        override fun doInBackground(vararg params: Void?): Cursor? {
+            return weakContent.get()?.contentResolver?.query(
+                DbOpenHelper.CONTENT_URI, null, "${FavoriteDb.FILM_TYPE} = ?",
+                arrayOf(MOVIE), null
+            )
+        }
+
+        override fun onPostExecute(result: Cursor?) {
+            super.onPostExecute(result)
+            if (result != null) {
+                weakCallback.get()?.postExecute(result)
             }
         }
     }
-    override fun onBackPressed() {
-        moveTaskToBack(true)
-        super.onBackPressed()
+}
+
+interface LoadMoviesCallback {
+    fun postExecute(cursor: Cursor)
+}
+
+fun mapCursorToArrayList(cursor: Cursor): List<Movie> {
+    val movie = mutableListOf<Movie>()
+
+    while (cursor.moveToNext()) {
+        val id = cursor.getString(cursor.getColumnIndexOrThrow(FavoriteDb.FILM_ID))
+        val title = cursor.getString(cursor.getColumnIndexOrThrow(FavoriteDb.FILM_TITLE))
+        val poster_path = cursor.getString(cursor.getColumnIndexOrThrow(FavoriteDb.POSTER_PATH))
+        val overview = cursor.getString(cursor.getColumnIndexOrThrow(FavoriteDb.OVERVIEW))
+        val release_date = cursor.getString(cursor.getColumnIndexOrThrow(FavoriteDb.RELEASE_DATE))
+        movie.add(Movie(id, title, poster_path, overview, release_date))
     }
+    return movie
 }

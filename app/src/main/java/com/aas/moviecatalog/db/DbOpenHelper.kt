@@ -10,10 +10,12 @@ import org.jetbrains.anko.db.*
 class DbOpenHelper(context: Context, dbName: String = "dbFavorite.db") :
     ManagedSQLiteOpenHelper(context, dbName, null, 1) {
     private lateinit var database: SQLiteDatabase
+
     companion object {
 
         const val AUTHORITY = "com.aas.moviecatalog"
         private const val SCHEME = "content"
+
         private var instance: DbOpenHelper? = null
 
         @Synchronized
