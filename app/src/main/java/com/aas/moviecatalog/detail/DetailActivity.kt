@@ -6,6 +6,7 @@ import android.view.View
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.aas.moviecatalog.MainActivity
@@ -15,6 +16,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailActivity : AppCompatActivity(), DetailInterface {
 
@@ -78,6 +81,7 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
             .get()
             .load(ApiRepository.BASE_IMAGE_URL + posterPath)
             .into(ivPosterFilm)
+
     }
 
     override fun showTvShow(tv: DetailTvShowModel) {
