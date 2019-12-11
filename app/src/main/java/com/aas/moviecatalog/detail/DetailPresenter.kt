@@ -7,6 +7,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import com.aas.moviecatalog.R
 import com.aas.moviecatalog.api.ApiRepository
 import com.aas.moviecatalog.api.MovieDBApi

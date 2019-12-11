@@ -90,8 +90,11 @@ class ReminderReceiver : BroadcastReceiver() {
 
 
     private fun loadMovie(context: Context) {
+        val patternDate = "yyyy-MM-dd"
+        val today = SimpleDateFormat(patternDate).format(Date()).toString()
+
         val service = ApiRepository.create()
-        service.loadMovie(ApiRepository.API_KEY).enqueue(object : Callback<MovieResponseModel> {
+        service.todayReleaseMovie(ApiRepository.API_KEY, today, today).enqueue(object : Callback<MovieResponseModel>{
             override fun onFailure(call: Call<MovieResponseModel>, t: Throwable) {
                 Log.e(LOG_TAG, "${t.message}")
             }
@@ -107,31 +110,23 @@ class ReminderReceiver : BroadcastReceiver() {
                     }
                 }
             }
+
         })
+
     }
 
     private fun processNotification(context: Context, data: MovieResponseModel) {
         var notificationId = 0
         for (i in notificationId until data.results.size) {
-            if (checkDate(data.results[i].release_date)) {
                 sendReleaseTodayNotification(
                     context, notificationId, data.results[i].id,
                     data.results[i].title, data.results[i].overview
                 )
                 notificationId++
-            }
         }
     }
 
-    private fun checkDate(releaseDate: String): Boolean {
-        val patternDate = "yyyy-MM-dd"
-        val parsedReleaseDate =
-            SimpleDateFormat(patternDate, Locale.getDefault()).parse(releaseDate)
-        val today = SimpleDateFormat(patternDate, Locale.getDefault()).format(Date())
-        val parsedToday = SimpleDateFormat(patternDate, Locale.getDefault()).parse(today)
 
-        return parsedReleaseDate?.compareTo(parsedToday) == 0
-    }
 
     private fun sendReleaseTodayNotification(
         context: Context,
