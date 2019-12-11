@@ -20,13 +20,11 @@
         app:tabTextColor="@color/grey">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_movie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_movie" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_tv" />

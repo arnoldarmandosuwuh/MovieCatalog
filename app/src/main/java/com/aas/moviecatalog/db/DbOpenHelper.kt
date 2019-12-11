@@ -25,11 +25,12 @@ class DbOpenHelper(context: Context, dbName: String = "dbFavorite.db") :
             }
             return instance as DbOpenHelper
         }
+
         val CONTENT_URI = Uri.Builder().scheme(SCHEME)
             .authority(AUTHORITY).appendPath(FavoriteDb.TABLE_FAVORITE).build()
     }
 
-    fun open(){
+    fun open() {
         database = instance!!.writableDatabase
     }
 
@@ -51,24 +52,20 @@ class DbOpenHelper(context: Context, dbName: String = "dbFavorite.db") :
 
 
     override fun onCreate(db: SQLiteDatabase?) {
-        if (db != null) {
-            db.createTable(
-                FavoriteDb.TABLE_FAVORITE, true,
-                FavoriteDb.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-                FavoriteDb.FILM_ID to TEXT,
-                FavoriteDb.FILM_TYPE to TEXT,
-                FavoriteDb.FILM_TITLE to TEXT,
-                FavoriteDb.POSTER_PATH to TEXT,
-                FavoriteDb.OVERVIEW to TEXT,
-                FavoriteDb.RELEASE_DATE to TEXT
-            )
-        }
+        db?.createTable(
+            FavoriteDb.TABLE_FAVORITE, true,
+            FavoriteDb.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+            FavoriteDb.FILM_ID to TEXT,
+            FavoriteDb.FILM_TYPE to TEXT,
+            FavoriteDb.FILM_TITLE to TEXT,
+            FavoriteDb.POSTER_PATH to TEXT,
+            FavoriteDb.OVERVIEW to TEXT,
+            FavoriteDb.RELEASE_DATE to TEXT
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        if (db != null) {
-            db.dropTable(FavoriteDb.TABLE_FAVORITE, true)
-        }
+        db?.dropTable(FavoriteDb.TABLE_FAVORITE, true)
     }
 }
 

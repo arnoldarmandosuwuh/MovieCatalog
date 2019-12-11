@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         Locale.setDefault(locale)
         val config = Configuration()
         config.locale = locale
-        val resources = getResources()
+        val resources = resources
         resources.updateConfiguration(config, resources.displayMetrics)
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
