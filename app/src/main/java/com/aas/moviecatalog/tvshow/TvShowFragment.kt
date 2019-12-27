@@ -16,7 +16,6 @@ import com.aas.moviecatalog.R
 import com.aas.moviecatalog.api.ApiRepository
 import com.aas.moviecatalog.detail.DetailActivity
 import com.aas.moviecatalog.model.TvShow
-import kotlinx.android.synthetic.main.fragment_movie.*
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 
 /**

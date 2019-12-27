@@ -95,7 +95,7 @@ class MovieFragment : Fragment(), MovieInterface {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         val menuItem = menu.findItem(R.id.action_search)
-        if(menuItem!=null){
+        if (menuItem != null) {
             val searchView: SearchView = menuItem.actionView as SearchView
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
