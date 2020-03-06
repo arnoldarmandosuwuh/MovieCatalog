@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_fav_app -> {
                     val intent = Intent()
-                    intent.setComponent(ComponentName("com.aas.favoriteapp", "com.aas.favoriteapp.MainActivity"))
+                    intent.component = ComponentName("com.aas.favoriteapp", "com.aas.favoriteapp.MainActivity")
                     startActivity(intent)
                 }
             }
@@ -95,6 +95,11 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.notification_menu -> {
                 startActivity<SettingsActivity>()
+            }
+            R.id.action_fav_app -> {
+                val intent = Intent()
+                intent.component = ComponentName("com.aas.favoriteapp", "com.aas.favoriteapp.MainActivity")
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
