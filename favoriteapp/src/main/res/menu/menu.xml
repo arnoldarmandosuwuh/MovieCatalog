@@ -2,7 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/nav_movie"
-        android:icon="@drawable/ic_local_movies_white_24dp"
+        android:icon="@drawable/icons8_movie_64"
         android:title="@string/movie_catalog"
         app:showAsAction="ifRoom" />
 </menu>
