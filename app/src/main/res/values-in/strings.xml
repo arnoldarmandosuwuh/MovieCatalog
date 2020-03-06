@@ -49,5 +49,6 @@
 
     <string name="daily_notif_title">Selamat Pagi!</string>
     <string name="daily_notif_content">Cek film menarik hari ini!</string>
+    <string name="favorite_app">Aplikasi Favorit</string>
 
 </resources>

@@ -1,6 +1,8 @@
 package com.aas.favoriteapp
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.database.ContentObserver
 import android.database.Cursor
 import android.os.AsyncTask
@@ -8,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -89,7 +94,26 @@ class MainActivity : AppCompatActivity(), LoadMoviesCallback {
             }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.nav_movie -> {
+                var intent: Intent = Intent()
+                intent.setComponent(ComponentName("com.aas.moviecatalog", "com.aas.moviecatalog.MainActivity"))
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
+
 
 interface LoadMoviesCallback {
     fun postExecute(cursor: Cursor)

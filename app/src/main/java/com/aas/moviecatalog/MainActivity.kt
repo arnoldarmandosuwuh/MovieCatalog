@@ -1,5 +1,6 @@
 package com.aas.moviecatalog
 
+import android.content.ComponentName
 import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +57,11 @@ class MainActivity : AppCompatActivity() {
                         .commit()
 
                     supportActionBar?.setTitle(R.string.favorite)
+                }
+                R.id.nav_fav_app -> {
+                    val intent = Intent()
+                    intent.setComponent(ComponentName("com.aas.favoriteapp", "com.aas.favoriteapp.MainActivity"))
+                    startActivity(intent)
                 }
             }
             true

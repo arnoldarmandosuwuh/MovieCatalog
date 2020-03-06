@@ -50,4 +50,5 @@
 
     <string name="daily_notif_title">Good Morning!</string>
     <string name="daily_notif_content">Lets check awesome movie today!</string>
+    <string name="favorite_app">Favorite Application</string>
 </resources>

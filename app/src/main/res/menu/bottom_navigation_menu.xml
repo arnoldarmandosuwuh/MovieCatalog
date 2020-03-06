@@ -15,4 +15,9 @@
         android:icon="@drawable/icons8_love_circled_50"
         android:title="@string/favorite" />
 
+    <item
+        android:id="@+id/nav_fav_app"
+        android:icon="@drawable/icons8_window_favorite_50"
+        android:title="@string/favorite_app" />
+
 </menu>
