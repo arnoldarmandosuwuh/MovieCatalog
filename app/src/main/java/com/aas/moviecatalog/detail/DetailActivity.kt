@@ -17,6 +17,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class DetailActivity : AppCompatActivity(), DetailInterface {
@@ -73,8 +75,13 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
 
         supportActionBar?.title = title
 
+        var date = LocalDate.parse(releaseDate)
+        var formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy")
+        var formattedDate = date.format(formatter)
+
+
         tvJudulFilm.text = title
-        tvDate.text = releaseDate
+        tvDate.text = formattedDate
         tvOverview.text = overview
 
         Picasso
@@ -92,8 +99,13 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
 
         supportActionBar?.title = title
 
+        var date = LocalDate.parse(releaseDate)
+        var formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy")
+        var formattedDate = date.format(formatter)
+
+
         tvJudulFilm.text = title
-        tvDate.text = releaseDate
+        tvDate.text = formattedDate
         tvOverview.text = overview
 
         Picasso
