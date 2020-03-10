@@ -105,7 +105,8 @@ class MainActivity : AppCompatActivity(), LoadMoviesCallback {
         return when (item.itemId) {
             R.id.nav_movie -> {
                 var intent: Intent = Intent()
-                intent.component = ComponentName("com.aas.moviecatalog", "com.aas.moviecatalog.MainActivity")
+                intent.component =
+                    ComponentName("com.aas.moviecatalog", "com.aas.moviecatalog.MainActivity")
                 startActivity(intent)
                 true
             }

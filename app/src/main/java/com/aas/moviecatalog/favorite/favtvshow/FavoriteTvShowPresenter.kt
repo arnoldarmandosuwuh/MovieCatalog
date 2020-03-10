@@ -25,7 +25,8 @@ class FavoriteTvShowPresenter (private val mInterface: FavoriteTvShowInterface){
                 listTv.add(TvShow(
                     favorite[i].filmId,
                     favorite[i].filmTitle,
-                    favorite[i].posterPath
+                    favorite[i].posterPath,
+                    favorite[i].overview
                 ))
             }
         }

@@ -38,6 +38,7 @@ class MovieAdapter(
         LayoutContainer {
         fun bind(context: Context, movie: Movie, onClickListener: (Movie) -> Unit) {
             itemView.tvJudul.text = movie.title
+            itemView.tvOverview.text = movie.overview
             Picasso
                 .get()
                 .load(ApiRepository.BASE_IMAGE_URL + movie.poster_path)

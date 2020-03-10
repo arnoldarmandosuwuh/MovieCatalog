@@ -20,7 +20,7 @@ android {
         debug {
             buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
             buildConfigField "String", "API_KEY", "\"e852848561694f1300e3eac1deb19c49\""
-            buildConfigField "String", "POSTER_URL", "\"https://image.tmdb.org/t/p/w185\""
+            buildConfigField "String", "POSTER_URL", "\"https://image.tmdb.org/t/p/original\""
         }
         release {
             minifyEnabled false

@@ -31,6 +31,7 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
     private var title: String = "title"
     private var overview: String = "overview"
     private var releaseDate: String = "release_date"
+    private var backdropPath: String = "backdrop_path"
     private var menuItem: Menu? = null
     private var isFav: Boolean = false
 
@@ -72,6 +73,7 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
         posterPath = movie.poster_path
         overview = movie.overview
         releaseDate = movie.release_date
+        backdropPath = movie.backdrop_path
 
         supportActionBar?.title = title
 
@@ -88,6 +90,11 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
             .get()
             .load(ApiRepository.BASE_IMAGE_URL + posterPath)
             .into(ivPosterFilm)
+
+        Picasso
+            .get()
+            .load(ApiRepository.BASE_IMAGE_URL+backdropPath)
+            .into(ivBackdrop)
 
     }
 
@@ -96,6 +103,7 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
         posterPath = tv.poster_path
         overview = tv.overview
         releaseDate = tv.first_air_date
+        backdropPath = tv.backdrop_path
 
         supportActionBar?.title = title
 
@@ -112,6 +120,11 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
             .get()
             .load(ApiRepository.BASE_IMAGE_URL + posterPath)
             .into(ivPosterFilm)
+
+        Picasso
+            .get()
+            .load(ApiRepository.BASE_IMAGE_URL+backdropPath)
+            .into(ivBackdrop)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

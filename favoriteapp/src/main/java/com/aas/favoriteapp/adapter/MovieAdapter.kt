@@ -1,11 +1,15 @@
 package com.aas.favoriteapp.adapter
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.aas.favoriteapp.MainActivity
 import com.aas.favoriteapp.R
 import com.aas.favoriteapp.api.ApiRepository
 import com.aas.favoriteapp.model.Movie
@@ -41,6 +45,7 @@ class MovieAdapter(
             context: Context, movie: Movie
         ) {
             itemView.tvJudul.text = movie.title
+            itemView.tvOverview.text = movie.overview
             Picasso.get().load(ApiRepository.BASE_IMAGE_URL + movie.poster_path)
                 .into(itemView.ivGambar)
             containerView.setOnClickListener {

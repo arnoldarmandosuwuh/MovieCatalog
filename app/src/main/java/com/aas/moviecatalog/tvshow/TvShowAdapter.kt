@@ -38,6 +38,7 @@ class TvShowAdapter(
         LayoutContainer {
         fun bind(context: Context, tv: TvShow, onClickListener: (TvShow) -> Unit) {
             itemView.tvJudul.text = tv.name
+            itemView.tvOverview.text = tv.overview
             Picasso
                 .get()
                 .load(ApiRepository.BASE_IMAGE_URL + tv.poster_path)
