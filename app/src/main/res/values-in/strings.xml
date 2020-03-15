@@ -50,5 +50,10 @@
     <string name="daily_notif_title">Selamat Pagi!</string>
     <string name="daily_notif_content">Cek film menarik hari ini!</string>
     <string name="favorite_app">Aplikasi Favorit</string>
+    <string name="dark_theme">DARK_THEME</string>
+    <string name="day">Tema Terang</string>
+    <string name="night">Tema Gelap</string>
+    <string name="dark">Mode Gelap</string>
+    <string name="setting_key">SETTING_KEY</string>
 
 </resources>

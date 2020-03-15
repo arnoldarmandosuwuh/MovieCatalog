@@ -51,4 +51,9 @@
     <string name="daily_notif_title">Good Morning!</string>
     <string name="daily_notif_content">Lets check awesome movie today!</string>
     <string name="favorite_app">Favorite Application</string>
+    <string name="dark_theme">DARK_THEME</string>
+    <string name="day">Day Theme</string>
+    <string name="night">Night Theme</string>
+    <string name="dark">Dark Mode</string>
+    <string name="setting_key">SETTING_KEY</string>
 </resources>

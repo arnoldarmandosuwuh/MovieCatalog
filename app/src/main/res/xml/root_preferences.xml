@@ -31,4 +31,14 @@
             app:title="@string/release_today_reminder" />
 
     </PreferenceCategory>
+    <PreferenceCategory
+        app:key="@string/setting_key"
+        app:title="@string/setting">
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="@string/dark_theme"
+            app:summaryOff="@string/day"
+            app:summaryOn="@string/night"
+            app:title="@string/dark"/>
+    </PreferenceCategory>
 </PreferenceScreen>

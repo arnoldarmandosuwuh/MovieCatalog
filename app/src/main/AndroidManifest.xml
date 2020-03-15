@@ -16,10 +16,10 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".setting.SettingsActivity"
+            android:name="com.aas.moviecatalog.ui.setting.SettingsActivity"
             android:label="@string/title_activity_settings" />
 
-        <receiver android:name=".widget.FavoriteWidget">
+        <receiver android:name="com.aas.moviecatalog.ui.widget.FavoriteWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -30,7 +30,7 @@
         </receiver>
 
         <activity
-            android:name=".detail.DetailActivity"
+            android:name="com.aas.moviecatalog.ui.detail.DetailActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -41,22 +41,22 @@
         </activity>
 
         <service
-            android:name=".widget.FavoriteWidgetService"
+            android:name="com.aas.moviecatalog.ui.widget.FavoriteWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <service
-            android:name=".widget.WidgetService"
+            android:name="com.aas.moviecatalog.ui.widget.WidgetService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver
-            android:name=".setting.ReminderReceiver"
+            android:name="com.aas.moviecatalog.ui.setting.ReminderReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <provider
             android:authorities="com.aas.moviecatalog"
-            android:name=".provider.FavoriteProvider"
+            android:name="com.aas.moviecatalog.repository.provider.FavoriteProvider"
             android:exported="true"
             android:readPermission="com.aas.moviecatalog.READ_DATABASE"
             android:writePermission="com.aas.moviecatalog.WRITE_DATABASE" />

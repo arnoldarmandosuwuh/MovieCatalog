@@ -7,15 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.aas.moviecatalog.favorite.FavoriteFragment
-import com.aas.moviecatalog.movie.MovieFragment
-import com.aas.moviecatalog.setting.SettingsActivity
-import com.aas.moviecatalog.tvshow.TvShowFragment
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.preference.PreferenceManager
+import com.aas.moviecatalog.ui.favorite.FavoriteFragment
+import com.aas.moviecatalog.ui.movie.MovieFragment
+import com.aas.moviecatalog.ui.setting.SettingsActivity
+import com.aas.moviecatalog.ui.tvshow.TvShowFragment
+import com.aas.moviecatalog.util.App
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var app: App = App()
 
     companion object {
         const val DATA_EXTRA = "data"
@@ -26,6 +31,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val dark = PreferenceManager.getDefaultSharedPreferences(this)
+            .getBoolean(resources.getString(R.string.dark_theme), false)
+
+        when (dark) {
+            true -> app.theme(AppCompatDelegate.MODE_NIGHT_YES)
+            else -> app.theme(AppCompatDelegate.MODE_NIGHT_NO)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -60,7 +72,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_fav_app -> {
                     val intent = Intent()
-                    intent.component = ComponentName("com.aas.favoriteapp", "com.aas.favoriteapp.MainActivity")
+                    intent.component =
+                        ComponentName("com.aas.favoriteapp", "com.aas.favoriteapp.MainActivity")
                     startActivity(intent)
                 }
             }
@@ -98,7 +111,8 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_fav_app -> {
                 val intent = Intent()
-                intent.component = ComponentName("com.aas.favoriteapp", "com.aas.favoriteapp.MainActivity")
+                intent.component =
+                    ComponentName("com.aas.favoriteapp", "com.aas.favoriteapp.MainActivity")
                 startActivity(intent)
             }
         }
