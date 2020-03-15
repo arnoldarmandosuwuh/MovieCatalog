@@ -5,11 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.database.ContentObserver
 import android.database.Cursor
-import android.os.AsyncTask
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -37,7 +34,9 @@ class MainActivity : AppCompatActivity(), LoadMoviesCallback {
     private lateinit var dataObserver: DataObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

@@ -3,6 +3,7 @@ package com.aas.moviecatalog
 import android.content.ComponentName
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -31,13 +32,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val dark = PreferenceManager.getDefaultSharedPreferences(this)
-            .getBoolean(resources.getString(R.string.dark_theme), false)
 
-        when (dark) {
-            true -> app.theme(AppCompatDelegate.MODE_NIGHT_YES)
-            else -> app.theme(AppCompatDelegate.MODE_NIGHT_NO)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val dark = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean(resources.getString(R.string.dark_theme), false)
+
+            when (dark) {
+                true -> app.theme(AppCompatDelegate.MODE_NIGHT_YES)
+                else -> app.theme(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
