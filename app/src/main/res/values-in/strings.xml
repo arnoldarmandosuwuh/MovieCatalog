@@ -55,5 +55,6 @@
     <string name="night">Tema Gelap</string>
     <string name="dark">Mode Gelap</string>
     <string name="setting_key">SETTING_KEY</string>
+    <string name="please_wait">Mohon Tunggu…</string>
 
 </resources>
