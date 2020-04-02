@@ -90,7 +90,7 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
         tvDate.text = formattedDate
         tvOverview.text = overview
         tvDistributed.text = companies
-        tvDuration.text = movie.runtime + " minutes"
+        tvDuration.text = movie.runtime + " " + getString(R.string.minute)
 
         Picasso
             .get()
@@ -130,7 +130,7 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
         tvDate.text = formattedDate
         tvOverview.text = overview
         tvDistributed.text = companies
-        tvDuration.text = tv.episode_run_time[0].toString() + " minutes"
+        tvDuration.text = tv.episode_run_time[0].toString() + " " + getString(R.string.minute)
 
         Picasso
             .get()

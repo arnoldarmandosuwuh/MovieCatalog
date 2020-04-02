@@ -59,4 +59,5 @@
     <string name="please_wait">Please Wait…</string>
     <string name="duration_time">Duration</string>
     <string name="distributor">Production</string>
+    <string name="minute">minutes</string>
 </resources>
