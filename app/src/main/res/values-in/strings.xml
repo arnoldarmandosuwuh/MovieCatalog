@@ -56,5 +56,7 @@
     <string name="dark">Mode Gelap</string>
     <string name="setting_key">SETTING_KEY</string>
     <string name="please_wait">Mohon Tunggu…</string>
+    <string name="duration_time">Durasi</string>
+    <string name="distributor">Produksi</string>
 
 </resources>

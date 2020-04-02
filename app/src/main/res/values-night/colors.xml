@@ -3,7 +3,8 @@
     <color name="colorPrimary">#212525</color>
     <color name="colorPrimaryDark">#151717</color>
     <color name="colorAccent">#DFDFDF</color>
-    <color name="white">#ffffff</color>
+    <color name="white">#1E1C1C</color>
     <color name="grey">#535151</color>
     <color name="colorWidget">#145B91</color>
+    <color name="darker_gray">@android:color/background_light</color>
 </resources>

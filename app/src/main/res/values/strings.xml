@@ -57,4 +57,6 @@
     <string name="dark">Dark Mode</string>
     <string name="setting_key">SETTING_KEY</string>
     <string name="please_wait">Please Wait…</string>
+    <string name="duration_time">Duration</string>
+    <string name="distributor">Production</string>
 </resources>

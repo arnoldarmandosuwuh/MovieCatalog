@@ -72,6 +72,15 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
 
         supportActionBar?.title = title
 
+        var companies = ""
+        for (i in 0 until movie.production_companies.size){
+            var comma = ", "
+            if (i == movie.production_companies.size - 1){
+                comma = ""
+            }
+            companies += (movie.production_companies[i].name + comma)
+        }
+        
         var date = LocalDate.parse(releaseDate)
         var formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy")
         var formattedDate = date.format(formatter)
@@ -80,6 +89,8 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
         tvJudulFilm.text = title
         tvDate.text = formattedDate
         tvOverview.text = overview
+        tvDistributed.text = companies
+        tvDuration.text = movie.runtime + " minutes"
 
         Picasso
             .get()
@@ -102,14 +113,24 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
 
         supportActionBar?.title = title
 
+        var companies = ""
+        for (i in 0 until tv.production_companies.size){
+            var comma = ", "
+            if (i == tv.production_companies.size - 1){
+                comma = ""
+            }
+            companies += (tv.production_companies[i].name + comma)
+        }
+
         var date = LocalDate.parse(releaseDate)
         var formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy")
         var formattedDate = date.format(formatter)
 
-
         tvJudulFilm.text = title
         tvDate.text = formattedDate
         tvOverview.text = overview
+        tvDistributed.text = companies
+        tvDuration.text = tv.episode_run_time[0].toString() + " minutes"
 
         Picasso
             .get()
