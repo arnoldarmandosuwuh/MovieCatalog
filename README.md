@@ -26,9 +26,14 @@ Memiliki fitur pengingat harian
 ## Release Today Reminder
 Memiliki fitur pengingat bila ada film atau serial tv rilis hari ini
 
+## Widget Favorite
+Menampilkan Favorite dalam widget
+
 ## Dark Mode (Additional)
 Tambahan Fitur DarkMode untuk android 9.0 keatas
 
+## FavoriteApp
+Membuat sebuah aplikasi untuk menampilkan film favorit atau serial tv favorit dari MovieCatalog dengan **Content Provider**
+
 # Preview
-![IMG_20200404_000744](https://user-images.githubusercontent.com/33775307/78386914-a64b7380-7608-11ea-9ccd-0c3cf9d8dab1.jpg)
-![IMG_20200404_000715](https://user-images.githubusercontent.com/33775307/78386929-a9defa80-7608-11ea-86cc-ed784230d1ce.jpg)
+![IMG_20200404_000744](https://user-images.githubusercontent.com/33775307/78388825-e3653500-760b-11ea-915e-59245afdadbb.jpg) ![IMG_20200404_000715](https://user-images.githubusercontent.com/33775307/78388873-f8da5f00-760b-11ea-8b9c-17d4db7aeea7.jpg)
