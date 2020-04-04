@@ -5,6 +5,6 @@
     <color name="colorAccent">#DFDFDF</color>
     <color name="white">#1E1C1C</color>
     <color name="grey">#535151</color>
-    <color name="colorWidget">#145B91</color>
+    <color name="colorWidget">#0F1010</color>
     <color name="darker_gray">@android:color/background_light</color>
 </resources>
