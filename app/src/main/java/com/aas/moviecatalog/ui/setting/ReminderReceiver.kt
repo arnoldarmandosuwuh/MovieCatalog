@@ -152,7 +152,7 @@ class ReminderReceiver : BroadcastReceiver() {
 
         val builder: NotificationCompat.Builder
         builder = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+            .setSmallIcon(R.drawable.icons8_movie_96)
             .setContentTitle(context.resources.getString(R.string.nowplaying) + title)
             .setContentText(overview)
             .setColor(ContextCompat.getColor(context, android.R.color.transparent))
@@ -190,7 +190,7 @@ class ReminderReceiver : BroadcastReceiver() {
 
         val builder: NotificationCompat.Builder
         builder = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+            .setSmallIcon(R.drawable.icons8_movie_96)
             .setContentTitle(context.resources.getString(R.string.daily_notif_title))
             .setContentText(context.resources.getString(R.string.daily_notif_content))
             .setColor(ContextCompat.getColor(context, android.R.color.transparent))
