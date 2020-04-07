@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.toast
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import kotlin.math.min
 
 class DetailActivity : AppCompatActivity(), DetailInterface {
 
@@ -81,16 +82,16 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
             companies += (movie.production_companies[i].name + comma)
         }
         
-        var date = LocalDate.parse(releaseDate)
-        var formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy")
-        var formattedDate = date.format(formatter)
+        val date = LocalDate.parse(releaseDate)
+        val formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy")
+        val formattedDate = date.format(formatter)
 
 
         tvJudulFilm.text = title
         tvDate.text = formattedDate
         tvOverview.text = overview
         tvDistributed.text = companies
-        tvDuration.text = movie.runtime + " " + getString(R.string.minute)
+        tvDuration.text = String.format("${movie.runtime} %1s",getString(R.string.minute))
 
         Picasso
             .get()
@@ -122,15 +123,23 @@ class DetailActivity : AppCompatActivity(), DetailInterface {
             companies += (tv.production_companies[i].name + comma)
         }
 
-        var date = LocalDate.parse(releaseDate)
-        var formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy")
-        var formattedDate = date.format(formatter)
+        val date = LocalDate.parse(releaseDate)
+        val formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy")
+        val formattedDate = date.format(formatter)
 
         tvJudulFilm.text = title
         tvDate.text = formattedDate
         tvOverview.text = overview
         tvDistributed.text = companies
-        tvDuration.text = tv.episode_run_time[0].toString() + " " + getString(R.string.minute)
+
+        val minute = getString(R.string.minute)
+        val runtime = if (tv.episode_run_time.size > 1) {
+            "${tv.episode_run_time[0]} - ${tv.episode_run_time[1]} ${minute}"
+        } else {
+            "${tv.episode_run_time[0]} ${minute}"
+        }
+
+        tvDuration.text = runtime
 
         Picasso
             .get()
